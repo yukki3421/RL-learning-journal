@@ -1,0 +1,33 @@
+# Local editor / agent settings
+.agents/
+.codex/
+.vscode/
+.idea/
+.DS_Store
+
+# Local environments, caches and logs
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+*.log
+
+# Credentials and local environment variables
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Personal progress backups (exported by index.html)
+embodied-lab-progress-*.json
+
+# Large training artifacts; publish download references instead
+checkpoints/
+datasets/
+wandb/
+*.pt
+*.pth
+*.safetensors

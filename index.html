@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="从 VLA 到具身强化学习：8 周、56 天，以可复现的机器人强化学习 GitHub 项目为终点。">
+<title>Embodied Lab · VLA → RL 项目计划</title>
+<style>
+:root{--bg:#f5f6f2;--paper:#fff;--ink:#1c302a;--muted:#65736b;--line:#dde3da;--green:#286349;--soft:#eaf1e7;--orange:#b85b30;--orange-soft:#fff0e5;--radius:16px;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}button,input,select,textarea{font:inherit}button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #d49d55;outline-offset:3px}a{color:var(--green);text-decoration-thickness:1px;text-underline-offset:3px}button{border:1px solid var(--line);border-radius:9px;padding:9px 14px;background:white;color:var(--ink)}button:hover{background:var(--soft)}h1,h2,h3,p{margin:0}h2{font-size:22px;letter-spacing:-.5px}h3{font-size:16px}small,.muted{color:var(--muted)}input[type=checkbox]{width:18px;height:18px;flex-shrink:0;accent-color:var(--green);cursor:pointer}input:not([type=checkbox]):not([type=file]),textarea,select{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:white;color:var(--ink);max-width:100%}textarea{width:100%;resize:vertical;min-height:120px}label{cursor:pointer}pre{overflow:auto;margin:0;font:12px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}code{font-family:var(--mono);font-size:.88em;overflow-wrap:anywhere}hr{border:0;border-top:1px solid var(--line);margin:24px 0}[hidden]{display:none!important}.shell{display:grid;grid-template-columns:234px minmax(0,1fr);min-height:100vh}.sidebar{padding:32px 22px;background:#edf0e8;border-right:1px solid var(--line);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:32px}.brand{font-size:19px;line-height:1.3;font-weight:750;letter-spacing:-.5px;display:flex;gap:10px;align-items:center}.brand-icon{display:grid;place-items:center;background:var(--green);color:#fff;width:35px;height:38px;border-radius:10px;font:23px var(--mono)}.brand small{display:block;font:10px var(--mono);letter-spacing:2px;margin-top:7px}.eyebrow{font:11px var(--mono);letter-spacing:1.7px;color:var(--muted);text-transform:uppercase}.nav{display:grid;gap:7px}.nav button{text-align:left;border:0;background:transparent;padding:12px;font-weight:600;display:flex;align-items:center;gap:12px}.nav button[aria-current=page]{background:var(--green);color:white}.nav-num{font:11px var(--mono);opacity:.7}.side-card{border-top:1px solid #d5ddcf;padding-top:22px}.side-card p{margin-top:10px;font-size:12px;line-height:1.85}.side-end{margin-top:auto}.side-end .status{font-size:11px}.status::before{content:"";display:inline-block;width:6px;height:6px;background:#4d7a53;border-radius:50%;margin-right:7px}.main{padding:30px 40px 26px;max-width:1550px;width:100%;margin:auto}.topline{display:flex;justify-content:space-between;gap:16px;align-items:center;font-size:12px;margin-bottom:28px}.topline strong{font-weight:500}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toolbar button{font-size:12px;padding:7px 12px}.primary{background:var(--green);color:white;border-color:var(--green)}.primary:hover{background:#1d4a36}.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:30px;align-items:center;padding:15px 0 28px}.hero h1{font-size:clamp(27px,3vw,43px);letter-spacing:-1.5px;line-height:1.35;margin:14px 0 15px;font-weight:750}.hero h1 em{font-style:normal;color:var(--green)}.hero p{color:var(--muted);max-width:560px;font-size:13px;line-height:1.9}.pill{display:inline-flex;align-items:center;gap:7px;background:var(--soft);color:var(--green);border-radius:20px;padding:4px 10px;font-size:11px}.hero-art{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:#eef1e8;padding:23px 23px 18px;overflow:hidden}.hero-art:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#cad4c4 .8px,transparent .8px);background-size:17px 17px;opacity:.6}.hero-art>*{position:relative}.hero-art svg{display:block;width:100%;height:145px}.art-caption{display:flex;justify-content:space-between;gap:10px;font:10px var(--mono);color:var(--green)}.loop{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:5px;color:var(--muted);font-size:11px}.loop span{border:1px solid #cbd7c5;border-radius:5px;padding:4px 10px;background:#f9fbf6}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:0 0 30px}.stat{padding:17px 20px;border:1px solid var(--line);border-radius:12px;background:white}.stat>span{display:block;font-size:11px;color:var(--muted)}.stat strong{font:30px/1.5 var(--mono);letter-spacing:-1px}.stat small{font-size:11px;margin-left:5px}.stat-footer{font-size:11px;color:var(--muted);min-height:19px}.progress{height:5px;border-radius:8px;background:#e9eee6;overflow:hidden;margin-top:9px}.progress>i{height:100%;display:block;background:var(--green);transition:width .2s}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.section-head p{font-size:12px;color:var(--muted);margin-top:5px}.week-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:7px;margin-bottom:18px}.week-button{padding:12px 10px;text-align:left;border-radius:10px;min-width:0}.week-button.active{border-color:var(--green);background:var(--soft);box-shadow:inset 0 0 0 1px var(--green)}.week-button .eyebrow{font-size:10px;letter-spacing:1px}.week-button strong{display:block;font-size:12px;margin:6px 0 3px}.week-button small{font:10px var(--mono)}.week-button .progress{height:3px;margin-top:8px}.panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:24px}.week-brief{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:18px}.week-brief h3{margin-bottom:5px}.week-brief p{font-size:12px;color:var(--muted)}.week-gate{background:var(--soft);border:1px solid #d6e2cf;border-radius:10px;padding:12px 15px;font-size:12px;display:flex;align-items:flex-start;gap:10px;max-width:430px}.week-gate input{margin-top:2px}.plan-tools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}.plan-tools input{flex:1;min-width:120px}.plan-tools select{font-size:12px}.workbench{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px}.day-list{display:flex;flex-direction:column;gap:7px}.day-button{display:flex;text-align:left;align-items:center;gap:12px;padding:13px;width:100%;min-height:75px;background:#fff;border:1px solid var(--line);border-radius:11px}.day-button.active{background:#f0f5ec;border-color:#7c9a70}.day-number{font:18px var(--mono);color:#7f8d7f;min-width:28px}.day-text{flex:1}.day-text strong{display:block;font-size:12px;font-weight:600}.day-text small{font-size:10px;display:block;margin-top:5px}.day-status{font:11px var(--mono);color:var(--muted)}.day-status.done{color:var(--green)}.day-status.blocked{color:var(--orange)}.detail{min-width:0}.detail-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.detail-head h3{font-size:22px;margin:7px 0 8px}.detail-goal{font-size:13px;color:var(--muted);margin:6px 0 20px}.checklist{display:grid;gap:9px}.check-item{display:flex;align-items:flex-start;gap:11px;padding:13px;background:#f7f8f5;border:1px solid #edf0e9;border-radius:8px;font-size:13px}.check-item input{margin-top:2px}.check-item:has(input:checked){color:var(--muted);background:#f0f5ed}.check-item:has(input:checked) span{text-decoration:line-through;text-decoration-color:#91ab89}.deliverable{background:var(--orange-soft);border-left:3px solid #cf8457;padding:13px 15px;margin:18px 0;font-size:12px;line-height:1.9}.deliverable strong{color:#8e4d2e}.deliverable code{display:block;margin-top:4px}.meta-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 14px}.field{display:flex;flex-direction:column;gap:7px;font-size:12px}.field input,.field select{width:100%}.notes-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px}.detail-nav{display:flex;justify-content:space-between;margin-top:17px;gap:8px}.detail-nav button{font-size:12px}.track{margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}.heatmap{display:grid;grid-template-columns:repeat(28,1fr);gap:5px;margin:13px 0 8px}.heatmap button{padding:0;aspect-ratio:1;border-radius:4px;background:#e9eee5;border:1px solid #dce4d7;font:9px var(--mono)}.heatmap button.partial{background:#bad1ab}.heatmap button.complete{background:var(--green);color:white;border-color:var(--green)}.heatmap button.blocked{background:#f1d9c4;border-color:#c98b5f;color:#7b4326}.heatmap button.selected{outline:2px solid var(--ink);outline-offset:1px}.legend{font-size:10px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}.legend span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;background:#e9eee5}.legend .partial:before{background:#bad1ab}.legend .complete:before{background:var(--green)}.legend .blocked:before{background:#f1d9c4}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.project-banner{background:var(--green);color:white;padding:28px;border-radius:var(--radius)}.project-banner .eyebrow{color:#cbddc6}.project-banner h2{font-size:28px;margin:8px 0}.project-banner p{font-size:13px;line-height:1.9;color:#e1ecdc;max-width:820px}.project-banner .pill{margin-top:17px;background:#467d5e;color:#fff}.text-list{padding-left:19px;margin:12px 0 0;font-size:13px}.text-list li{padding:5px 0}.callout{background:#f3f6ee;padding:16px;border-radius:10px;font-size:12px;line-height:1.95;margin-top:16px}.callout strong{color:var(--green)}.panel h3+.muted{margin-top:8px;font-size:12px}.repo-tree{background:#192f27;color:#d4e5ca;padding:22px;border-radius:12px;margin-top:14px}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.result-box{padding:16px;border:1px solid var(--line);border-radius:10px}.result-box h4{font-size:12px;margin:0 0 12px}.pair{display:flex;gap:8px}.pair label{font-size:11px;min-width:0}.pair input{width:100%;margin-top:5px}.result-number{font:25px var(--mono);margin-top:14px;display:block}.resource-list{display:grid;gap:10px;margin-top:16px}.resource-link{padding:14px;border:1px solid var(--line);border-radius:9px;text-decoration:none;display:block}.resource-link:hover{background:var(--soft)}.resource-link strong{font-size:13px}.resource-link small{display:block;font-size:11px;margin-top:4px}.settings{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.settings .wide{grid-column:1/-1}.footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;gap:12px;font-size:10px;color:var(--muted)}.empty{padding:30px;text-align:center;color:var(--muted);font-size:13px}.toast{position:fixed;right:24px;bottom:24px;z-index:20;background:#1c302a;color:white;padding:13px 20px;border-radius:10px;font-size:12px;box-shadow:0 8px 30px #0002;max-width:min(440px,90vw)}.storage-warning{background:#fff0e5;border:1px solid #d7a47c;padding:12px 16px;border-radius:9px;font-size:12px;margin-bottom:18px;color:#854821}.skip{position:fixed;left:12px;top:-60px;background:#fff;z-index:99;padding:10px}.skip:focus{top:10px}.view{animation:appear .2s ease}@keyframes appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1600px){.main{padding:38px 55px}.workbench{grid-template-columns:340px 1fr}}
+@media(max-width:1180px){.shell{grid-template-columns:190px minmax(0,1fr)}.sidebar{padding:28px 15px}.main{padding:24px}.workbench{grid-template-columns:260px minmax(0,1fr)}.week-grid{grid-template-columns:repeat(4,1fr)}.hero{gap:20px}.hero h1{font-size:32px}.stat{padding:15px}.week-brief{flex-direction:column}.week-gate{max-width:none;width:100%}}
+@media(max-width:850px){.shell{display:block}.sidebar{height:auto;position:static;padding:16px 22px;flex-direction:row;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);border-right:0}.sidebar .side-card,.side-end{display:none}.brand{font-size:16px}.brand small{font-size:8px}.nav{display:flex;gap:4px}.nav button{font-size:12px;padding:10px}.nav-num{display:none}.main{padding:22px}.hero-art{padding:16px}.hero h1{font-size:29px}.hero-art svg{height:125px}.workbench{grid-template-columns:235px minmax(0,1fr)}.panel{padding:18px}.two-col{grid-template-columns:1fr}.settings{grid-template-columns:1fr 1fr}.heatmap{grid-template-columns:repeat(14,1fr)}}
+@media(max-width:620px){.sidebar{flex-direction:column;align-items:stretch;padding:16px}.brand{align-self:flex-start}.nav button{flex:1;justify-content:center}.main{padding:18px 15px}.topline{align-items:flex-start;margin-bottom:20px}.topline .crumb{max-width:130px}.toolbar{gap:5px;justify-content:flex-end}.toolbar button{padding:6px 9px;font-size:11px}.hero{grid-template-columns:1fr;padding:0 0 20px;gap:18px}.hero h1{font-size:33px}.hero-art{display:none}.stats{grid-template-columns:1fr 1fr;gap:9px;margin-bottom:23px}.stat strong{font-size:27px}.section-head{align-items:flex-start}.section-head h2{font-size:20px}.section-head button{font-size:11px;padding:8px 10px}.week-button{padding:10px 8px}.week-button strong{font-size:11px}.workbench{display:block}.day-list{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:16px}.day-button{min-height:76px;padding:10px;gap:8px}.day-number{font-size:15px;min-width:22px}.day-status{display:none}.day-text strong{font-size:11px}.day-text small{font-size:9px}.detail-head h3{font-size:21px}.meta-row{gap:8px}.result-grid{grid-template-columns:1fr}.settings{grid-template-columns:1fr}.project-banner{padding:23px}.project-banner h2{font-size:23px}.footer{flex-direction:column}.heatmap{gap:5px}.topline strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{.sidebar,.toolbar,.plan-tools,.detail-nav,.toast,.topline{display:none!important}.shell{display:block}.main{padding:0}.hero-art{display:none}.hero{display:block}.stats{grid-template-columns:repeat(4,1fr)}.workbench{grid-template-columns:230px 1fr}.panel,.stat{break-inside:avoid}body{background:white}}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">跳到主要内容</a>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><span class="brand-icon" aria-hidden="true">↗</span><div>Embodied Lab<small>LEARN · BUILD · SHIP</small></div></div>
+  <nav class="nav" aria-label="主要导航">
+    <button data-view="daily" aria-current="page"><span class="nav-num">01</span>每日计划</button>
+    <button data-view="project"><span class="nav-num">02</span>项目交付</button>
+    <button data-view="resources"><span class="nav-num">03</span>资料与设置</button>
+  </nav>
+  <div class="side-card"><div class="eyebrow">THE DESTINATION</div><h3 style="margin-top:10px">一个能被复现的<br>具身 RL 项目。</h3><p>从已有的 VLA 经验出发，走通环境交互、策略更新、独立评估和开源交付。</p><p><code>vla-rl-placement-lab</code><br>建议的 GitHub 仓库名</p></div>
+  <div class="side-card"><div class="eyebrow">WORKING RHYTHM</div><p>每天 2–3 小时主动投入<br>每周 6 天推进 + 1 天复盘<br>训练运行时间另计</p></div>
+  <div class="side-end"><span class="status" id="save-state" role="status">本地进度 · 自动保存</span><p class="muted" style="font-size:10px;margin-top:8px">定期导出备份，带走你的进度。</p></div>
+</aside>
+<main class="main" id="content">
+  <header class="topline"><div class="crumb"><span class="muted">学习工作台 / </span><strong id="view-name">每日计划</strong></div><div class="toolbar"><button id="export-btn">↓ 导出进度</button><button id="import-btn">↑ 导入备份</button><input type="file" id="import-file" accept=".json,application/json" hidden></div></header>
+  <div id="storage-warning" class="storage-warning" role="alert" hidden></div>
+  <section class="hero" aria-labelledby="hero-title"><div><span class="pill">● VLA → Embodied Reinforcement Learning</span><h1 id="hero-title">把 VLA 经验，变成一个<br><em>具身 RL 项目。</em></h1><p>56 天，从读懂 PPO 到交付可复现实验。每天都有可验证的产物，最后把代码、曲线、视频和实验结论一起放上 GitHub。</p></div>
+    <div class="hero-art"><div class="art-caption"><span>POLICY ↔ WORLD</span><span>01 / PLACEMENT LAB</span></div><svg viewBox="0 0 380 155" role="img" aria-label="机械臂将物体放入目标区域，策略通过环境反馈更新"><ellipse cx="193" cy="132" rx="145" ry="15" fill="#dae4d3"/><path d="M42 129H338" stroke="#a0b296" stroke-width="1.5"/><path d="M88 125V109H124V125" fill="#92aa87" stroke="#355e46" stroke-width="2"/><path d="M106 108L101 70L151 27L208 57" fill="none" stroke="#315f46" stroke-width="17" stroke-linejoin="round"/><path d="M106 108L101 70L151 27L208 57" fill="none" stroke="#a2bd90" stroke-width="10" stroke-linejoin="round"/><circle cx="101" cy="70" r="9" fill="#f5f7ef" stroke="#315f46" stroke-width="3"/><circle cx="151" cy="27" r="9" fill="#f5f7ef" stroke="#315f46" stroke-width="3"/><circle cx="208" cy="57" r="7" fill="#f5f7ef" stroke="#315f46" stroke-width="3"/><path d="M208 65V76M196 88V76H220V88" fill="none" stroke="#315f46" stroke-width="4" stroke-linecap="round"/><path d="M202 85L215 82L223 97L210 101Z" fill="#ce8657" stroke="#a55e36" stroke-width="1.5"/><path d="M232 86C259 72 284 86 284 105" fill="none" stroke="#7b9670" stroke-width="1.5" stroke-dasharray="4 5"/><path d="M279 101L284 107L288 100" fill="none" stroke="#7b9670" stroke-width="1.5"/><ellipse cx="285" cy="119" rx="33" ry="8" fill="#ecf2e7" stroke="#61805a" stroke-width="1.5"/><ellipse cx="285" cy="117" rx="24" ry="4" fill="none" stroke="#a3b997"/><text x="42" y="32" font-family="monospace" font-size="8" fill="#6c8064">πθ(a|o)</text><text x="308" y="88" font-family="monospace" font-size="9" fill="#6c8064">rₜ</text></svg><div class="loop"><span>观察</span>→<span>行动</span>→<span>反馈</span>→<span>更新</span></div></div>
+  </section>
+  <section class="stats" aria-label="真实记录的学习进度">
+    <div class="stat"><span>任务完成度</span><strong id="total-percent">0%</strong><small id="task-count">0 / 168</small><div class="progress"><i id="total-bar" style="width:0%"></i></div></div>
+    <div class="stat"><span>已完成学习日</span><strong id="days-done">0</strong><small>/ 56 天</small><div class="stat-footer" id="schedule-status">准备启程</div></div>
+    <div class="stat"><span>已记录投入</span><strong id="hours-total">0</strong><small>小时</small><div class="stat-footer">按实际填写，不按勾选推算</div></div>
+    <div class="stat"><span>GitHub 发布准备</span><strong id="release-count">0</strong><small>/ 10 项</small><div class="stat-footer" id="gate-count">0 / 8 周验收通过</div></div>
+  </section>
+  <section id="daily-view" class="view">
+    <div class="section-head"><div><div class="eyebrow">YOUR ROADMAP</div><h2 style="margin-top:4px">每天向交付迈进一步</h2><p id="date-range"></p></div><div class="toolbar"><button id="today-btn">回到今天</button><button id="next-btn" class="primary">继续未完成 →</button></div></div>
+    <div class="week-grid" id="week-grid" aria-label="选择计划周"></div>
+    <div class="week-brief"><div><h3 id="week-title"></h3><p id="week-desc"></p></div><label class="week-gate"><input type="checkbox" id="week-gate"><span><strong>本周验收</strong><br><span id="week-gate-text"></span></span></label></div>
+    <div class="plan-tools"><input type="search" id="search" placeholder="在本周搜索目标、任务或产物…" aria-label="搜索本周计划"><select id="filter" aria-label="筛选本周状态"><option value="all">全部状态</option><option value="todo">未完成</option><option value="done">已完成</option><option value="blocked">有阻塞</option></select></div>
+    <div class="workbench"><div class="day-list" id="day-list" aria-label="选择学习日"></div><article class="panel detail" id="day-detail" aria-label="当日目标与进度"></article></div>
+    <section class="track" aria-label="56 天进度总览"><div class="section-head" style="margin-bottom:0"><h3>56 天，每一格都有产出</h3><small>点击跳转到任意一天</small></div><div class="heatmap" id="heatmap"></div><div class="legend"><span>未开始</span><span class="partial">进行中</span><span class="complete">已完成</span><span class="blocked">有阻塞</span></div></section>
+  </section>
+  <section id="project-view" class="view" hidden>
+    <div class="project-banner"><div class="eyebrow">FLAGSHIP PROJECT / 8 WEEKS</div><h2>VLA-RL Placement Lab</h2><p>做一个“机械臂把物体放到盘子里”的单任务 RL 实验仓库。沿用现有 README 的 RL4VLA + PPO 主线，复用作者的 warm-up 检查点；自己的工作落在训练与评估封装、实验追踪、前后对比、失败分析和一个位置泛化实验上。</p><span class="pill">终点：可运行的代码 + 可追溯的结果 + 可观看的 Demo</span></div>
+    <div class="two-col"><article class="panel"><h3>锁定最小可交付范围</h3><ul class="text-list"><li><strong>任务：</strong>优先核验 RL4VLA 中 <code>PutOnPlateInScene25Single-v1</code> 与 warm-up 检查点的训练适配；Day 10 冻结实际任务 ID、配置和成功条件。</li><li><strong>方法：</strong>初始 VLA → 单任务 PPO 微调；第一轮不加入 GRPO、SAC、多任务或真机。</li><li><strong>比较：</strong>同一初始策略与自己训练的策略，使用相同的独立评估集合。作者 RL 检查点只能作为参考。</li><li><strong>实验：</strong>只改变物体初始位置。明确训练范围、测试范围以及二者是否重叠。</li><li><strong>个人贡献：</strong>可重复运行的入口、评估协议、逐 episode 数据、失败归因与实验报告；保留上游引用。</li></ul><div class="callout"><strong>交付不依赖“必须涨分”。</strong>必须走通训练→保存→独立加载→评估。预设希望成功率提高 ≥10 个百分点，但这只是探索目标；未提升时，用完整日志和失败分析说明结果，不选择性报告。</div></article>
+    <article class="panel"><h3>三个阶段闸门，保证项目落地</h3><ol class="text-list"><li><strong>Day 7 · 资源可行。</strong>拿到实际 GPU / 驱动信息，能启动仿真、渲染、加载模型并完成一次推理。当前会话无法读取 GPU，不能据此断定机器无 GPU。</li><li><strong>Day 14 · 路线冻结。</strong>主线仍不可运行时，切换到 ManiSkill <code>PickCube-v1</code> 的小策略 PPO，沿用后续训练、评估、泛化与交付里程碑。在日志中逐项替换 VLA 专属任务，明确“VLA 微调尚未完成”，不把小策略实验称作 VLA 结果。</li><li><strong>Day 28 · 工程闭环。</strong>必须有自己更新得到的检查点、独立评估 CSV 和视频。没有闭环则暂停新实验，先修复；压缩额外种子与非核心文档，保留发布周。</li></ol><div class="callout"><strong>资源预算：</strong>默认每天 2–3 小时主动投入，每周一天缓冲；GPU 训练时长另算。RL4VLA 上游示例区分单张 80GB 与两张 40GB 的布局，这不是最低配置承诺。先测峰值显存和每轮耗时，再确定并行度、训练步数与种子预算。</div></article></div>
+    <div class="two-col"><article class="panel"><h3>GitHub v1.0 发布清单</h3><p class="muted">手动验收真实产物。勾选学习任务不会自动完成发布验收。</p><div class="checklist" id="release-list" style="margin-top:16px"></div></article><article class="panel"><h3>目标仓库结构</h3><p class="muted">以下是后续要实现的结构，不表示文件或训练结果已经存在。</p><pre class="repo-tree">vla-rl-placement-lab/
+├── README.md              # 项目、结果、复现入口
+├── LICENSE + CITATION.cff # 授权与上游致谢
+├── index.html             # 这份学习进度页
+├── configs/               # baseline / train / eval
+├── scripts/               # setup / train / eval / plot
+├── src/                   # 环境适配、指标与封装
+├── tests/                 # 配置与评估统计的轻量检查
+├── results/               # CSV、配置摘要、训练曲线
+├── docs/                  # 实验协议与失败分析
+└── assets/                # 压缩后的 Demo / 图表
+
+# 大模型权重与完整日志使用外部存储，
+# 仓库中记录下载链接、版本与校验信息。</pre><div class="callout"><strong>README 最终应回答：</strong>做什么任务？为什么用 RL？复用了什么？自己改了什么？如何运行？基线与训练后表现如何？在哪些条件下失败？一条命令如何复现评估？</div><h3 style="margin-top:23px">结果记录约定</h3><p class="muted">先用验证集选模型，再冻结测试集。最终目标为 3 个独立训练种子 × 每种子 100 个独立测试 episode；预算不足则明确报告实际数量。记录每个种子的结果及种子间均值 / 标准差，不把重复评估当作独立训练。</p></article></div>
+    <article class="panel" style="margin-top:18px"><div class="section-head"><div><h3>首个训练种子 · 配对评估速记</h3><p>只填真实数据；空白代表尚未评估。完整逐 episode 记录保存在项目 CSV 中。</p></div></div><div class="result-grid"><div class="result-box"><h4>训练前 · warm-up 策略</h4><div class="pair"><label>成功次数<input id="before-success" type="number" min="0" step="1" placeholder="未填写" data-metric="beforeSuccess"></label><label>评估总次数<input id="before-total" type="number" min="1" step="1" placeholder="未填写" data-metric="beforeTotal"></label></div><output class="result-number" id="before-rate">—</output></div><div class="result-box"><h4>训练后 · 自己的 PPO 检查点</h4><div class="pair"><label>成功次数<input id="after-success" type="number" min="0" step="1" placeholder="未填写" data-metric="afterSuccess"></label><label>评估总次数<input id="after-total" type="number" min="1" step="1" placeholder="未填写" data-metric="afterTotal"></label></div><output class="result-number" id="after-rate">—</output></div></div><label class="field">评估证据与配置说明<input id="eval-evidence" maxlength="2000" placeholder="CSV 路径 / 检查点 / 训练种子 / 评估集合版本 / 任务配置"></label><label style="display:flex;gap:9px;align-items:center;font-size:12px;margin-top:13px"><input type="checkbox" id="paired-eval">已确认：同一评估集合、相同 episode 上限和推理设置</label><p id="metric-delta" class="callout" role="status">填写前后评估数据后，显示成功率差值。</p></article>
+  </section>
+  <section id="resources-view" class="view" hidden>
+    <div class="section-head"><div><div class="eyebrow">MAKE IT YOURS</div><h2 style="margin-top:4px">资料与计划设置</h2><p>先完成当天需要的知识，再带着问题回到实现。</p></div></div>
+    <article class="panel"><h3>计划档案</h3><div class="settings"><label class="field">开始日期<input type="date" id="start-date" min="2000-01-01" max="2100-12-31"></label><label class="field">每天可投入（小时）<input type="number" id="daily-hours" min="0.5" max="12" step="0.5"></label><label class="field">当前执行路线<select id="route"><option value="vla">RL4VLA + PPO（主线）</option><option value="small">ManiSkill 小策略 PPO（降级）</option></select></label><label class="field wide">资源与范围备注<textarea id="profile" maxlength="6000" placeholder="GPU / 显存 / 可用训练时段 / 熟悉的 VLA / 实际任务 ID / 路线调整原因" style="min-height:85px"></textarea></label></div><div class="callout" id="workload"></div><p class="muted" style="font-size:12px;margin-top:12px">改开始日期只调整日历，保留所有任务记录。每日时长用于估算容量，不会自动压缩任务。降级路线需要按 Day 14 的要求在每日日志中记录替代任务；本页不会自动把 VLA 任务标为完成。</p></article>
+    <div class="two-col"><article class="panel"><h3>接上现有的知识笔记</h3><p class="muted">已经有笔记不代表已经掌握；读懂并完成验收后再勾选。</p><div class="resource-list"><a class="resource-link" href="README.md"><strong>原始学习路线 ↗</strong><small>PPO → RL4VLA → 训练前后比较 → 泛化测试</small></a><a class="resource-link" href="notes/01-reward-and-return.md"><strong>01 / 奖励与回报</strong><small>Day 1 · 折扣回报、轨迹与符号约定</small></a><a class="resource-link" href="notes/02-computing-returns.md"><strong>02 / 训练时如何计算回报</strong><small>Day 2 · 反向递推、自举、终止与截断</small></a><a class="resource-link" href="notes/03-state-value-function.md"><strong>03 / 状态价值函数</strong><small>Day 3 · 从价值预测走向优势估计</small></a></div></article><article class="panel"><h3>只围绕主线使用的资料</h3><p class="muted">2026-11-10 核对官方来源；执行时固定 commit 与依赖版本。</p><div class="resource-list"><a class="resource-link" href="https://docs.cleanrl.dev/rl-algorithms/ppo/" target="_blank" rel="noopener noreferrer"><strong>CleanRL · PPO 实现 ↗</strong><small>Week 1–2 · 理解 rollout、GAE、策略与价值更新</small></a><a class="resource-link" href="https://github.com/gen-robot/RL4VLA" target="_blank" rel="noopener noreferrer"><strong>RL4VLA · 主线代码与检查点入口 ↗</strong><small>Week 2–6 · 核验任务、加载 warm-up 检查点并训练</small></a><a class="resource-link" href="https://maniskill.readthedocs.io/en/latest/user_guide/reinforcement_learning/setup.html" target="_blank" rel="noopener noreferrer"><strong>ManiSkill · RL 环境与评估接口 ↗</strong><small>环境 API、终止行为与评估；勿将最新版混装进旧版 fork</small></a><a class="resource-link" href="https://github.com/RLinf/RLinf" target="_blank" rel="noopener noreferrer"><strong>RLinf · 完成第一项目后再扩展 ↗</strong><small>留作后续框架学习，本轮不同时引入</small></a></div></article></div>
+    <div class="two-col"><article class="panel"><h3>每天怎么用这张计划表</h3><ol class="text-list"><li>打开“继续未完成”，优先补最早未完成的一天。</li><li>参考 30 分钟概念、90 分钟实现、30 分钟验证、10 分钟记录的节奏；按你的时间调整。</li><li>完成一项就勾一项，附上文件路径、命令或实验链接，再填写实际投入。</li><li>卡住时标记“有阻塞”，记录最小复现与下一步；每周第 7 天集中补齐。</li><li>周末检查验收产物，再手动勾选“本周验收”，并导出 JSON 备份。</li></ol></article><article class="panel"><h3>本地保存与备份</h3><p class="muted">这是不依赖后端的单文件网页。进度存在当前浏览器的 localStorage，不会写回 HTML，也不会自动同步到其他设备或 GitHub。</p><div class="callout">浏览器、访问地址、端口或文件位置变化后，可能看不到原记录。切换前先“导出进度”，再在新位置导入。隐私模式、清理浏览器数据或存储被禁用会影响保存；页面会提示保存失败。</div><p class="muted" style="font-size:12px;margin-top:12px">可双击 index.html 打开；在远程开发环境中，可运行 <code>python -m http.server 8000 --bind 127.0.0.1</code>，通过 SSH / 编辑器转发 8000 端口后访问。网页可离线使用；外部文档链接需要网络。</p></article></div>
+  </section>
+  <footer class="footer"><span>EMBODIED LAB / 学习进度来自你的记录，实验结论来自真实结果。</span><span>56 DAYS · ONE REPRODUCIBLE PROJECT</span></footer>
+</main></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<noscript><p style="padding:30px">请启用 JavaScript，以查看每日任务、记录进度和导入导出备份。</p></noscript>
+<script>
+'use strict';
+const WEEKS = [
+ {name:'RL 最小基础',goal:'把已有的回报与价值笔记串成一次 PPO 更新；尽早暴露算力问题。',gate:'能解释一次更新；CartPole 完成训练与加载；记录真实算力和仿真 / 模型可行性。'},
+ {name:'环境与基线',goal:'锁定一套代码、一个任务、一个初始策略和一个评估协议。',gate:'初始策略完成独立评估并保存 CSV / 视频；冻结路线、任务与预算。'},
+ {name:'读懂并接通',goal:'沿 rollout → GAE → loss → update 追踪数据，接通训练入口。',gate:'至少完成一次真实参数更新，日志有限；检查点能在新进程中加载。'},
+ {name:'交付首个闭环',goal:'用自己的训练检查点完成配对评估，做出第一个可观看的 Demo。',gate:'训练、保存、独立评估和绘图贯通；有训练前后 CSV、曲线和视频。'},
+ {name:'可信的比较',goal:'冻结协议，重复训练，检查成功率与奖励之外的行为证据。',gate:'有多种子比较或明确的预算限制；逐 episode 数据可追溯，不挑最好一次。'},
+ {name:'一个泛化实验',goal:'只改变物体位置，用训练前后两种策略测同一套未见条件。',gate:'明确训练 / 测试范围；完成 ID / OOD 对比，并说明失败与不确定性。'},
+ {name:'复现与工程化',goal:'把个人实验整理成别人能运行、能检查、能理解的仓库。',gate:'干净环境 smoke test 通过；配置、命令、权重来源与结果路径完整。'},
+ {name:'GitHub 发布',goal:'完成 README、演示和发布自检，交付第一个公开作品。',gate:'真实仓库链接、v1.0 标签、可读报告和 Demo 齐全，发布清单全部验收。'}
+];
+// 每天：标题、目标、三个可勾选动作、产物路径、完成标准。路径是计划，不是已生成的文件。
+const PLAN = [
+ ['盘点起点，明确终点','把“学会 RL”变成一个有边界的项目。',['阅读现有 README 和奖励与回报笔记，手算 [0,0,1] 在 γ=0.9 下的回报。','记录 VLA 经验、每天投入、可用 GPU / 显存与可运行时段。','写下项目任务、最小交付物、非目标与自己的贡献范围。'],'docs/project-scope.md','范围中有一个机器人任务、一种算法和明确产物；保留手算过程。'],
+ ['回报、自举与截断','理解采样不完整时，价值估计如何补上未来。',['阅读 notes/02-computing-returns.md，重跑反向递推例子。','分别构造真正终止、时间截断和 rollout 截断的例子。','写一个小脚本验证三种情况的 bootstrap 值，并解释重置边界。'],'exercises/returns.py','能说明为什么超时不能直接当作真正终止；输出与手算一致。'],
+ ['价值、Q 与优势','从“得到多少奖励”过渡到“动作比预期好多少”。',['阅读价值函数笔记，区分实际回报与期望回报。','补充 Q、A=Q−V 和 TD error 的数值例子。','画出 VLA 策略、价值网络和奖励之间的关系，标出可训练参数。'],'notes/04-advantage-and-td.md','给定 V(s)、r、V(s′)，能算 TD error，并解释它与优势的关系。'],
+ ['读懂 PPO 的一次更新','理解旧策略、GAE 与 clipping 如何连起来。',['读 CleanRL PPO 的 rollout、GAE 与 minibatch 更新部分。','手算一个概率比与正 / 负优势下的裁剪目标。','画出张量形状和数据流，标出 old log-prob 与停止梯度的位置。'],'notes/05-ppo-update.md','能从一段轨迹解释策略损失、价值损失与熵项，而非只背公式。'],
+ ['跑通第一个 PPO','用小环境熟悉训练、保存和独立评估。',['在独立环境中运行现成 CartPole PPO，记录依赖版本与 seed。','保存训练日志、回报曲线和 checkpoint。','在新进程加载模型评估，核对训练与评估代码入口。'],'results/cartpole/','脚本能重新运行；检查点可加载；有真实曲线和评估统计。'],
+ ['提前验证具身资源','在投入大规模训练前，验证硬件、仿真和模型推理。',['记录 GPU 驱动、CUDA、可用显存；无法访问时记录报错并确定计算资源。','按固定版本的 RL4VLA 说明建立独立环境，验证仿真 reset / step 和一帧渲染。','尝试 warm-up 模型加载与一次动作推理，记录峰值显存或最小报错。'],'docs/resource-check.md','得到可行配置或明确阻塞证据；不把未测试的显存估计当结论。'],
+ ['第一周验收与缓冲','补齐理解或环境阻塞，再进入机器人基线。',['复述 reward → return → value → advantage → PPO 的关系。','重跑 CartPole 评估，检查 Day 6 的仿真和推理记录。','列出资源问题的下一步与负责人，导出进度备份并验收本周。'],'docs/weekly/week-01.md','基础闭环可解释；具身资源已验证或有明确替代计划。'],
+ ['固定上游和依赖','让每一次实验都能追溯到确切的实现。',['固定 RL4VLA commit，记录其 ManiSkill / SimplerEnv fork 与 Python / CUDA 版本。','记录模型与仿真资产的来源、版本、下载要求及目录。','为自己的封装建立目录和依赖说明，避免混装最新 ManiSkill 到旧 fork。'],'docs/environment.md','记录精确版本与安装命令，不只写“安装最新版”。'],
+ ['机械臂环境 walkthrough','观察一个 episode 的完整生命周期。',['打印 observation / action 的键、形状、范围与 dtype。','运行少量 step，记录奖励、成功信号、终止与截断语义。','保存一段随机或初始策略视频，确认相机、夹爪与物体状态正常。'],'docs/environment-contract.md','能解释策略输入与控制输出，视频可播放，成功判定来自环境代码。'],
+ ['冻结一个放置任务','选择检查点可适配的单任务，而不是扩大任务集。',['核验 PutOnPlateInScene25Single-v1 的训练支持、奖励与 warm-up 检查点适配。','若不兼容，在同一上游固定一个可运行的单任务配置并写明理由。','固定语言指令、episode 上限、控制频率、动作归一化与执行步数。'],'configs/task.yaml','任务能 reset / step；任务 ID、成功条件和动作接口均已记录。'],
+ ['初始 VLA 的第一段动作','用作者 warm-up 检查点建立正确的初始策略。',['按上游方式加载 warm-up 模型，记录 checkpoint ID / revision。','验证图像预处理、语言模板、动作反归一化与控制接口。','运行至少 5 个排错 episode，保存成功或失败视频；全失败时逐项检查接口。'],'results/baseline-smoke/','动作合法、无 NaN；视频能解释，区分接口错误与策略能力不足。'],
+ ['先写评估协议','在看训练结果前决定如何公平比较。',['划分训练、验证、最终测试的种子或初始状态清单，禁止用测试挑模型。','固定 success、return、episode length、推理方式与最大步数的定义。','定义 CSV 字段：策略、训练 seed、eval seed、配置 hash、成功、回报、长度。'],'docs/evaluation-protocol.md + configs/eval.yaml','测试集合独立、可重复；同一策略重复评估的差异来源可解释。'],
+ ['测出可追溯的基线','把“看起来能做”变成真实的成功次数与分母。',['在冻结的验证集合上评估初始策略，目标 30–50 个 episode，记录实际数量。','保存逐 episode CSV，报告成功数 / 总数、回报与长度。','按固定规则选视频，初步归类感知、抓取、移动、放置与终止失败。'],'results/baseline/episodes.csv','基线 CSV 与视频能对应；无虚构分数，不只保留成功片段。'],
+ ['路线冻结与第二周验收','主线可用就继续；受资源阻塞则及时收缩。',['核验初始策略评估、视频与冻结配置；为缺失项补最小可运行结果。','主线仍不可行则记录降级为 ManiSkill PickCube-v1 小策略 PPO，并映射后续每日替代任务。','根据单轮耗时和显存写训练预算，导出备份并验收本周。'],'docs/route-decision.md','有可运行的机器人基线；明确 VLA 主线或小策略路线，不混称结果。'],
+ ['追踪 rollout','从环境交互找到更新所需的每个量。',['定位上游采样循环和 buffer，画出时间维与环境并行维。','记录 observation、action、reward、done、old log-prob、value 的来源与形状。','核对 action chunk、实际执行步数、奖励累计和 log-prob 对齐。'],'docs/rollout-trace.md','能用一个具体 batch 解释每个字段，发现对齐问题先修复再训练。'],
+ ['追踪回报与 GAE','将基础公式对应到真实的具身采样数据。',['定位 bootstrap、GAE 与 return 的实现位置。','抽取一段真实短轨迹，用小脚本独立计算并对照。','检查 reset 后的数据不会串到前一 episode，确认 timeout 的处理。'],'exercises/check_gae.py','手算、独立计算和训练实现一致；不跨 episode 混算。'],
+ ['追踪策略与价值损失','确认真正被优化的是你以为的目标。',['定位 ratio、clip、policy loss、value loss、entropy 和 KL 统计。','打印可训练参数范围、优化器参数组与冻结模块。','解释动作概率的聚合方式；核验当前实现是否使用 LoRA / critic。'],'docs/loss-and-parameters.md','能说明哪些参数更新以及为什么；不凭框架名称猜测实现细节。'],
+ ['给训练装上观测窗口','用日志定位数值、探索和性能问题。',['记录 success、return、length、KL、clip fraction 与优势统计。','记录采样耗时、更新耗时、环境步数、模型版本和峰值显存。','给非有限数、非法动作和空 batch 添加能定位原因的检查。'],'src/monitoring.py + docs/log-fields.md','一次短运行日志完整，指标含义和单位明确，出错能定位到批次。'],
+ ['第一次真实参数更新','用最小预算验证训练链路，而非追求分数。',['用最小可行并行度运行 1–3 轮 rollout / update。','比较更新前后可训练参数，确认梯度有限、参数确实变化。','保存 loss / reward / memory 日志，记录全失败批次的行为。'],'results/train-smoke/','真实参数更新发生且数值有限；日志能区分推理与训练。'],
+ ['保存、重载与恢复','验证检查点不是一个无法使用的文件。',['保存模型、必要优化器状态、随机状态和配置摘要。','在新进程独立加载并运行至少 5 个排错 episode。','验证 resume 的实际行为；若不支持精确续训，明确写出限制。'],'scripts/resume.sh + results/reload-smoke/','可独立加载；恢复方式经过验证，模型和配置能一一对应。'],
+ ['第三周验收与修复','把一轮训练讲清楚并补齐缺失证据。',['演示从 rollout 到 update 再到重载评估的全过程。','修复 NaN、无成功信号、显存不足或动作接口的首要阻塞。','记录可复现命令、当前缺陷与下周预算，导出备份并验收。'],'docs/weekly/week-03.md','至少一个有效训练检查点能在新进程评估；训练数据流可解释。'],
+ ['封装最小训练入口','将手工命令变成可配置、可追溯的实验。',['建立自己的 train 入口，显式传入任务、seed、输出目录和预算。','保存完整 resolved config、上游 commit 与初始模型版本。','固定日志和 checkpoint 命名，防止覆盖其他实验。'],'scripts/train.sh + configs/train.yaml','换 seed 或目录即可复用；输出记录可还原完整运行参数。'],
+ ['第一次预算内训练','完成一段有边界的真实训练。',['按 Day 14 预算启动第一个训练 seed，冻结其他超参数。','记录采样步数与 wall-clock，按预定间隔保存检查点。','用验证集监测，不用最终测试结果选择 checkpoint。'],'results/train-seed-0/','有完整配置、日志和检查点；主动投入与 GPU 运行时间分开记录。'],
+ ['检查学习信号','用训练曲线与失败视频共同判断问题。',['绘制 success、return、KL、clip fraction 与时间开销曲线。','抽取预先指定的中间 checkpoint，检查失败动作有无变化。','若训练失败，记录原因后只调整一个参数，并保留失败运行。'],'results/curves/ + docs/training-debug.md','结论引用真实日志；奖励上升不被直接解释为成功率上升。'],
+ ['训练后的独立评估','使用相同协议比较初始与训练策略。',['在固定验证集合重评初始策略与选定的训练 checkpoint。','确认相同环境、最大步数、推理设置与 reset 条件。','生成逐 episode CSV，报告成功数 / 总数，并填写页面速记。'],'results/paired-validation/','两种策略的评估配置一致；模型选择过程与测试集合隔离。'],
+ ['第一张结果表与曲线','让读者看到发生了什么，而非只看到运行截图。',['汇总 baseline / trained 的成功率、回报、长度与采样预算。','绘制训练曲线，图例说明平滑方式和原始数据路径。','写一段结果解释，区分工程闭环、单次改善与稳定提升。'],'scripts/plot.py + results/summary.csv','图表能由保存的 CSV 重建；每个数字可追溯到运行。'],
+ ['做出第一个 Demo','用相同初始条件展示训练前后行为。',['按固定 seed 录制前后对比视频，包含一个失败案例。','标注任务、策略版本、实际速度与训练预算，避免混用作者结果。','写一个最简 README 草稿，给出训练和评估入口。'],'assets/demo-v0.mp4 + docs/readme-draft.md','视频可播放、策略标签清楚；读者能看懂任务与前后变化。'],
+ ['里程碑：首个具身 RL 闭环','第 4 周必须收敛到一个能运行的作品。',['从新终端执行训练短跑 → 保存 → 独立加载 → 评估 → 绘图。','核对 CSV、曲线、检查点引用与视频是否来自同一套配置。','若闭环未完成，暂停新增实验优先修复；导出备份并验收。'],'docs/milestone-mvp.md','已有自己训练的机器人策略、独立结果和 Demo，而不只是运行上游推理。'],
+ ['冻结正式实验协议','在更多计算前锁定比较方法。',['冻结训练预算、超参数、验证选模规则与最终测试集合。','计划 3 个独立训练 seed 与每 seed 100 个测试 episode，按资源记录实际预算。','明确早停、失败运行处理和汇总统计规则。'],'configs/experiment-matrix.yaml','先写协议后看结果；预算不足时写清缩减，不悄悄改变口径。'],
+ ['独立训练 seed 1','检查第一个结果是否依赖偶然初始化。',['用第二个独立训练 seed 重跑，保持采样预算一致。','监控运行健康度，完整保存配置、日志与 checkpoint。','记录与首个 seed 的差异，避免用测试集调参。'],'results/train-seed-1/','这是独立训练，不是对同一模型换评估 seed；记录实际计算成本。'],
+ ['独立训练 seed 2','给稳定性判断增加真实证据。',['用第三个独立训练 seed 重跑相同训练配置。','保存训练与验证记录，按统一规则选择 checkpoint。','若资源不够，明确写出未运行及原因，不填补或复制结果。'],'results/train-seed-2/ 或 docs/compute-limit.md','保留每个实际训练 seed 的证据；未完成项不冒充结果。'],
+ ['一次正式测试','让测试集只负责检验已选好的模型。',['对各 seed 的冻结 checkpoint 在独立测试集合评估。','用相同集合评估初始策略，记录成功数与分母。','保存全部 episode 结果及异常，评估后不再用该测试集选超参数。'],'results/final-test/episodes.csv','所有策略可公平比较，测试集没有参与模型选择。'],
+ ['统计与不确定性','把单次涨分和稳定改善分开。',['按训练 seed 计算成功率，再报告种子间均值与标准差。','记录成功数 / 总数；如使用区间，注明计算方法和独立性假设。','保留所有运行并解释异常，不把 episode 重采样当作训练稳定性。'],'results/final-test/summary.csv','统计口径可复算；一个训练 seed 时不声称已验证稳定提升。'],
+ ['失败案例归因','从机器人行为中提出下一步可验证的假设。',['按预定规则抽样失败视频，分类为接近、抓取、移动、放置、终止等。','对照初始与训练后失败分布，关联曲线与动作轨迹。','写出 3 个有证据的观察与 1 个待验证假设，区分相关与因果。'],'docs/failure-analysis.md','每条观察至少有一个视频或数据证据；不凭单个成功片段下结论。'],
+ ['第五周验收与补跑','整理主结果，之后只增加一个泛化变量。',['核对训练 seed、测试分母、配置 hash 和视频命名。','补齐缺失评估或说明算力限制，冻结主结果表。','列出下周只改变的位置因素，导出备份并验收。'],'docs/weekly/week-05.md','主结果可追溯；任何未完成重复实验都透明标注。'],
+ ['设计位置泛化测试','回答一个具体问题：换位置后，RL 还有效吗？',['定义训练位置范围与 OOD 测试位置范围，明确是否重叠。','固定对象、背景、指令、控制器等其他因素。','核验环境能实现此扰动；预先保存测试初始状态或采样配置。'],'configs/ood-position.yaml','本轮只改变一个因素；不能将随机换 seed 直接称作 OOD。'],
+ ['验证泛化环境','确保测到的是能力变化而非环境损坏。',['可视化多个位置样本，确认可达、无碰撞初始化与有效成功判定。','对照 ID / OOD 配置，检查除位置范围外无额外变化。','冻结 OOD 评估集合与数量，记录构造方法。'],'assets/ood-layouts/ + docs/ood-protocol.md','测试设置有效且可复现；不存在无意改变相机或奖励的混淆。'],
+ ['初始策略的 OOD 表现','为泛化结论建立匹配的对照。',['在冻结 OOD 集合评估初始策略。','保存 episode CSV、视频与失败类型。','核对 episode 上限、推理参数和指标定义与 ID 测试一致。'],'results/ood/baseline.csv','OOD 基线使用指定初始策略，结果分母和配置完整。'],
+ ['训练策略的 OOD 表现','用同一批未见条件测试已经冻结的策略。',['对各可用训练 seed 的冻结模型运行相同 OOD 集合。','保存全部成功和失败记录，不据此重新挑选 checkpoint。','记录评估耗时，缺失运行明确标记未完成。'],'results/ood/trained.csv','与 OOD 基线使用同一协议；泛化评估不反向污染模型选择。'],
+ ['画出 ID / OOD 对比','直接展示能力收益和失效边界。',['绘制初始 / 训练策略 × ID / OOD 的结果表或柱状图。','标注每格的 seed 数、episode 数和实际误差条定义。','结合视频解释变化；没有优势时如实写出限制。'],'results/ood/comparison.png + results/ood/summary.csv','四种条件可比较；图中没有未运行的数据或未定义误差条。'],
+ ['写实验报告初稿','把问题、方法、证据和局限串成一个故事。',['写问题、假设、任务、算法、训练与评估设置。','插入主结果、位置泛化图与代表性失败案例。','区分上游贡献与自己的工作，列明未验证的多任务 / 真机能力。'],'docs/experiment-report.md','读者能知道结论在哪些条件下成立；结果可追溯到文件。'],
+ ['第六周验收与范围收束','停止加算法，把时间留给可复现交付。',['从配置和数据重新生成主结果与 OOD 图表。','复核报告中的每个分数、模型名和推断是否有证据。','列出工程整理清单，导出备份并验收本周。'],'docs/weekly/week-06.md','有完整实验故事和明确局限；后两周不新增算法或任务。'],
+ ['整理代码边界','让自己的贡献和上游实现都清晰可见。',['将配置、环境适配、指标统计和脚本整理为稳定目录。','清理硬编码绝对路径，统一输入输出参数。','保留上游引用与改动说明，去除无关实验临时文件。'],'src/ + configs/ + scripts/','别人不需要你的个人目录就能运行；没有混入无关模型或数据。'],
+ ['锁定运行环境','把“我这里能跑”变成明确依赖。',['保存已验证的依赖版本与系统 / 驱动说明。','提供资产和模型获取步骤、revision 与校验信息。','在独立环境执行安装 smoke test，记录实际耗时与问题。'],'requirements.lock 或 environment.yml + docs/setup.md','按说明能重建环境；模型与仿真依赖来源可追溯。'],
+ ['补关键检查','只验证会影响实验正确性的核心逻辑。',['检查配置解析、seed 传递和输出目录隔离。','用含失败、超时和缺失值的小样本验证 success 汇总分母。','为模型加载、环境 reset / step 提供最小 smoke 命令，重型检查标明资源要求。'],'tests/ + scripts/smoke.sh','统计不会静默丢弃失败 episode；轻量检查能独立执行。'],
+ ['复现入口一键化','将多步流程组织成清楚的调用方式。',['为训练、评估和绘图分别提供一条稳定入口命令。','检查参数默认值、错误提示、日志路径和断点恢复说明。','在新终端用 README 草稿执行最小全流程。'],'scripts/train.sh + scripts/eval.sh + scripts/plot.py','不依赖 shell 历史或隐藏环境变量；命令产出与文档一致。'],
+ ['处理权重与大文件','让 GitHub 仓库轻量，同时结果可获取。',['将大权重、数据集与完整日志排除出 Git 跟踪。','选择可发布的检查点存放方式，记录下载路径、版本和校验值。','核验上游代码、模型和数据的许可，补 LICENSE / NOTICE / 引用。'],'docs/checkpoints.md + .gitignore + LICENSE','仓库内无大权重或凭证；外部资产有合法来源和可验证入口。'],
+ ['从干净环境复现','按新使用者视角验证整个交付。',['在干净 checkout / 独立环境仅按文档安装和准备资产。','运行短训练、checkpoint 加载、独立评估和绘图。','记录缺失步骤并修正文档，保存 smoke 日志。'],'docs/reproduction-log.md','从零入口可走通；完整训练成本与 smoke 成本分别说明。'],
+ ['第七周验收与修复','发布前冻结代码与实验资产。',['检查文档入口、相对路径、图表、视频和模型链接。','复核轻量检查和干净环境 smoke 结果，修复阻塞问题。','冻结候选版本，导出进度备份并验收本周。'],'docs/release-candidate.md','候选版本的代码、配置、结果和复现日志能相互对应。'],
+ ['写项目首页 README','让访问者在一分钟内理解你的项目。',['首页给出任务、一句话结论与前后对比 Demo。','写明上游复用、个人贡献、安装与最小评估命令。','加入主结果表、资源成本、局限与完整报告链接。'],'README.md','无需聊天上下文就能理解；没有把未完成的计划写成已实现功能。'],
+ ['完成演示与架构图','用视觉材料降低理解和复现成本。',['制作 30–60 秒 Demo，包含训练前后对照及失败片段。','绘制 observation → policy → action → env → reward → update 的架构图。','标明任务、checkpoint、速度、seed 与媒体来源，压缩可展示资产。'],'assets/demo.mp4 + assets/architecture.svg','视频真实、标签明确；架构图与代码实现一致。'],
+ ['整理实验报告与引用','使结果具有可审查的完整上下文。',['定稿训练设置、评估协议、主结果、泛化与失败分析。','给出硬件、耗时、seed 数、episode 分母及已知不确定性。','补齐论文、上游仓库、模型与数据引用，核对个人贡献描述。'],'docs/experiment-report.md + CITATION.cff','每个核心结论都有数据支持；未实现能力与复用部分明确标注。'],
+ ['发布前检查','按清单审查内容与可访问性。',['检查 Git 跟踪列表，排除凭证、私有路径、原始数据和巨大二进制。','验证 README 命令、图片相对路径、Demo、模型链接与许可证。','逐项验收页面中的 GitHub 发布清单，只勾真实完成的项目。'],'docs/pre-release-check.md','不依赖本机未跟踪文件；链接、命令、权重说明与产物一致。'],
+ ['创建 GitHub 项目','把本地作品变成可以访问的仓库。',['创建或选定 GitHub 仓库，设置名称、简介与合适的可见性。','提交代码、配置、报告、CSV 和压缩媒体，保留清晰提交记录。','从仓库页面逐个验证关键入口，记录真实仓库链接。'],'GitHub 仓库链接（写入当天日志）','真实仓库可访问；README、报告与 Demo 能打开，尚未发布则不勾完成。'],
+ ['发布 v1.0','为可复现版本提供明确锚点。',['重新 clone 已推送仓库，运行最小评估 / smoke 流程。','创建 v1.0 标签与 Release，记录对应 commit、主要结果和限制。','从新 clone 验证外部权重入口、配置和结果路径，保存复现记录。'],'GitHub v1.0 Release 链接（写入当天日志）','发布版本绑定确切代码；下载与复现入口可用，不只推送空仓库。'],
+ ['项目验收与下一阶段','用已交付成果说明你完成了哪些转型。',['演示训练闭环、配对评估、泛化测试、失败分析和 GitHub 页面。','回顾 8 周证据与未完成项；逐条确认发布清单与最终验收。','写下一阶段路线，只选一个方向：更多任务、GRPO、SAC / DSRL 或真机；导出最终备份。'],'docs/retrospective.md + 进度备份 JSON','公开作品和复现证据齐全；清楚区分已掌握能力与下一阶段目标。']
+];
+const RELEASE = ['训练入口可运行：配置、seed、预算与输出目录明确','独立评估可运行：加载检查点并输出逐 episode CSV','初始与训练策略有可比较的真实结果','完成一个位置泛化实验，报告设定与局限','训练曲线、结果表能从保存的数据重新生成','前后对比 Demo 可观看，并包含失败案例','README 说明任务、个人贡献、安装、命令和成本','依赖、模型来源、许可证与上游引用完整','干净 checkout 复现通过，仓库无凭证或大权重','GitHub 仓库与 v1.0 Release 已发布、入口可访问'];
+const STORAGE_KEY = 'embodied-lab-progress-v1';
+const DAY_MS = 86400000;
+const $ = id => document.getElementById(id);
+const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function localDate(date=new Date()){return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;}
+function validDate(s){return typeof s==='string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && s>='2000-01-01' && s<='2100-12-31' && Number.isFinite(Date.parse(s+'T00:00:00Z')) && new Date(s+'T00:00:00Z').toISOString().slice(0,10)===s;}
+function dateFor(day){return new Date(Date.parse(state.startDate+'T00:00:00Z')+(day-1)*DAY_MS).toISOString().slice(0,10);}
+function prettyDate(date){return date.slice(5).replace('-',' / ');}
+function todayIndex(){return Math.floor((Date.parse(localDate()+'T00:00:00Z')-Date.parse(state.startDate+'T00:00:00Z'))/DAY_MS)+1;}
+function freshState(){return {version:1,startDate:localDate(),dailyHours:2.5,route:'vla',profile:'',days:{},gates:{},release:{},metrics:{beforeSuccess:'',beforeTotal:'',afterSuccess:'',afterTotal:'',evidence:'',paired:false}};}
+// 严格重建已知字段，备份导入不直接合并任意对象属性。
+function validateState(raw){
+ if(!raw || typeof raw!=='object' || raw.version!==1 || !validDate(raw.startDate)) throw Error('备份格式或开始日期无效');
+ const out=freshState();out.startDate=raw.startDate;
+ if(typeof raw.dailyHours!=='number'||!Number.isFinite(raw.dailyHours)||raw.dailyHours<.5||raw.dailyHours>12) throw Error('每日投入范围应为 0.5–12 小时');
+ out.dailyHours=raw.dailyHours;
+ if(!['vla','small'].includes(raw.route)||typeof raw.profile!=='string'||raw.profile.length>6000) throw Error('计划档案格式无效');
+ out.route=raw.route;out.profile=raw.profile;
+ for(const field of ['days','gates','release','metrics']){if(!raw[field]||typeof raw[field]!=='object'||Array.isArray(raw[field]))throw Error('备份缺少 '+field);}
+ for(let d=1;d<=56;d++) if(Object.hasOwn(raw.days,d)){
+   const r=raw.days[d];
+   if(!r||!Array.isArray(r.checks)||r.checks.length!==3||!r.checks.every(x=>typeof x==='boolean')||typeof r.notes!=='string'||r.notes.length>12000||typeof r.hours!=='number'||!Number.isFinite(r.hours)||r.hours<0||r.hours>24||typeof r.blocked!=='boolean')throw Error('Day '+d+' 的记录无效');
+   out.days[d]={checks:[...r.checks],notes:r.notes,hours:r.hours,blocked:r.blocked};
+ }
+ for(const [field,count] of [['gates',8],['release',10]])for(let i=0;i<count;i++){if(Object.hasOwn(raw[field],i)){if(typeof raw[field][i]!=='boolean')throw Error('验收记录无效');out[field][i]=raw[field][i];}}
+ for(const k of ['beforeSuccess','beforeTotal','afterSuccess','afterTotal']){const v=raw.metrics[k];if(typeof v!=='string'||!/^\d{0,7}$/.test(v))throw Error('评估数字格式无效');out.metrics[k]=v;}
+ if(typeof raw.metrics.evidence!=='string'||raw.metrics.evidence.length>2000||typeof raw.metrics.paired!=='boolean')throw Error('评估说明格式无效');
+ out.metrics.evidence=raw.metrics.evidence;out.metrics.paired=raw.metrics.paired;return out;
+}
+let state=freshState(), storageBlocked=false;
+try{const saved=localStorage.getItem(STORAGE_KEY);if(saved)state=validateState(JSON.parse(saved));}
+catch(error){storageBlocked=true;}
+let selectedDay=Math.max(1,Math.min(56,todayIndex()));
+let selectedWeek=Math.floor((selectedDay-1)/7), view='daily', toastTimer;
+function record(day){return state.days[day]||{checks:[false,false,false],notes:'',hours:0,blocked:false};}
+function editableRecord(day){if(!state.days[day])state.days[day]=record(day);return state.days[day];}
+function doneCount(day){return record(day).checks.filter(Boolean).length;}
+function dayDone(day){return doneCount(day)===3&&!record(day).blocked;}
+function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,3500);}
+function warnStorage(message){$('storage-warning').textContent=message;$('storage-warning').hidden=false;$('save-state').textContent='未保存 · 请导出备份';}
+function save(){
+ if(storageBlocked){warnStorage('浏览器存储不可用，或已有记录无法读取。当前修改仅保留在页面内，请立即导出备份；有效备份导入后会尝试重新启用保存。');return;}
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));$('save-state').textContent='已保存 · '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});$('storage-warning').hidden=true;}
+ catch(error){warnStorage('自动保存失败（浏览器限制或空间不足）。当前修改仍在页面内，请立即导出 JSON 备份。');}
+}
+function renderStats(){
+ const tasks=PLAN.reduce((n,_,i)=>n+doneCount(i+1),0),done=PLAN.filter((_,i)=>dayDone(i+1)).length;
+ const hours=Object.values(state.days).reduce((n,r)=>n+r.hours,0),gates=Object.values(state.gates).filter(Boolean).length,release=Object.values(state.release).filter(Boolean).length;
+ const pct=Math.round(tasks/168*100),today=todayIndex();
+ $('total-percent').textContent=pct+'%';$('task-count').textContent=`${tasks} / 168`;$('total-bar').style.width=pct+'%';$('days-done').textContent=done;$('hours-total').textContent=Number(hours.toFixed(1));$('release-count').textContent=release;$('gate-count').textContent=`${gates} / 8 周验收通过`;
+ const overdue=PLAN.filter((_,i)=>i+1<today&&!dayDone(i+1)).length;
+ $('schedule-status').textContent=today<1?'计划尚未开始':today>56?`计划期已结束 · 待完成 ${56-done} 天`:`日历 Day ${today} · 此前待补 ${overdue} 天`;
+ $('date-range').textContent=`${state.startDate} → ${dateFor(56)} · 每周 6 天推进 + 1 天复盘 · ${state.route==='vla'?'RL4VLA 主线':'小策略降级路线（每日替代见日志）'}`;
+}
+function renderWeeks(){
+ $('week-grid').innerHTML=WEEKS.map((w,i)=>{let n=0;for(let d=i*7+1;d<=i*7+7;d++)n+=doneCount(d);return `<button class="week-button ${i===selectedWeek?'active':''}" data-week="${i}" aria-pressed="${i===selectedWeek}"><span class="eyebrow">WEEK ${String(i+1).padStart(2,'0')}</span><strong>${w.name}</strong><small>${n}/21 TASKS ${state.gates[i]?'✓':''}</small><div class="progress"><i style="width:${n/21*100}%"></i></div></button>`;}).join('');
+ $('week-title').textContent=`W${String(selectedWeek+1).padStart(2,'0')} / ${WEEKS[selectedWeek].name}`;$('week-desc').textContent=WEEKS[selectedWeek].goal;
+ $('week-gate-text').textContent=WEEKS[selectedWeek].gate;$('week-gate').checked=Boolean(state.gates[selectedWeek]);
+}
+function renderDays(){
+ const query=$('search').value.trim().toLowerCase(),filter=$('filter').value;let html='';
+ for(let day=selectedWeek*7+1;day<=selectedWeek*7+7;day++){
+  const p=PLAN[day-1],r=record(day),done=dayDone(day),n=doneCount(day);
+  if(query&&!JSON.stringify(p).toLowerCase().includes(query))continue;
+  if(filter==='todo'&&done||filter==='done'&&!done||filter==='blocked'&&!r.blocked)continue;
+  const status=r.blocked?'阻塞':done?'完成':n?'进行中':'待开始';
+  html+=`<button class="day-button ${day===selectedDay?'active':''}" data-day="${day}" aria-pressed="${day===selectedDay}"><span class="day-number">${String(day).padStart(2,'0')}</span><span class="day-text"><strong>${p[0]}</strong><small>${prettyDate(dateFor(day))} · ${day%7===0?'复盘 / 缓冲':'目标 2–3h'}${day===todayIndex()?' · 今天':''}</small></span><span class="day-status ${r.blocked?'blocked':done?'done':''}">${status}<br>${n}/3</span></button>`;
+ }
+ $('day-list').innerHTML=html||'<div class="empty">本周没有符合筛选的任务。<br>调整搜索或状态以查看其他日期。</div>';
+}
+function renderDetail(){
+ const p=PLAN[selectedDay-1],r=record(selectedDay),day=selectedDay;
+ $('day-detail').innerHTML=`<div class="detail-head"><div><div class="eyebrow">DAY ${String(day).padStart(2,'0')} / ${dateFor(day)}</div><h3>${p[0]}</h3></div><span class="pill">${day%7===0?'复盘日':'实践日'}</span></div><p class="detail-goal">${p[1]}</p><div class="checklist">${p[2].map((text,i)=>`<label class="check-item"><input type="checkbox" data-task="${i}" ${r.checks[i]?'checked':''}><span>${text}</span></label>`).join('')}</div><div class="deliverable"><strong>今日产物目标</strong><code>${p[3]}</code><div style="margin-top:7px"><strong>验收：</strong>${p[4]}</div></div><div class="meta-row"><label class="field">实际投入 / 小时<input id="day-hours" type="number" min="0" max="24" step="0.1" value="${r.hours}" aria-label="当日实际投入小时"></label><label class="field">执行状态<select id="day-blocked"><option value="normal" ${!r.blocked?'selected':''}>正常推进</option><option value="blocked" ${r.blocked?'selected':''}>有阻塞 · 需处理</option></select></label></div><div class="notes-label"><label for="day-notes">学习记录 / 产物证据 / 阻塞与下一步</label><small>自动保存</small></div><textarea id="day-notes" maxlength="12000" placeholder="完成了什么？记录文件路径、命令、实验链接或关键结论。\n哪里卡住了？下一次先解决哪一步？\n若采用降级路线，请明确写下替代任务及验收证据。">${escapeHtml(r.notes)}</textarea><div class="detail-nav"><button id="prev-day" ${day===1?'disabled':''}>← 前一天</button><button id="next-day" ${day===56?'disabled':''}>后一天 →</button></div>`;
+}
+function renderHeatmap(){
+ $('heatmap').innerHTML=PLAN.map((p,i)=>{const day=i+1,r=record(day),n=doneCount(day);return `<button data-day="${day}" class="${r.blocked?'blocked':n===3?'complete':n?'partial':''} ${day===selectedDay?'selected':''}" title="Day ${day} · ${p[0]} · ${n}/3${r.blocked?' · 阻塞':''}" aria-label="Day ${day}，${p[0]}，完成 ${n}/3${r.blocked?'，有阻塞':''}">${day}</button>`;}).join('');
+}
+function renderProgress(){renderStats();renderWeeks();renderDays();renderHeatmap();}
+function selectDay(day){selectedDay=day;selectedWeek=Math.floor((day-1)/7);$('search').value='';$('filter').value='all';renderProgress();renderDetail();}
+function switchView(next){view=next;for(const name of ['daily','project','resources'])$(name+'-view').hidden=name!==next;document.querySelectorAll('[data-view]').forEach(b=>{if(b.dataset.view===next)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});$('view-name').textContent=({daily:'每日计划',project:'项目交付',resources:'资料与设置'})[next];}
+function renderRelease(){$('release-list').innerHTML=RELEASE.map((t,i)=>`<label class="check-item"><input type="checkbox" data-release="${i}" ${state.release[i]?'checked':''}><span>${t}</span></label>`).join('');}
+function metricRate(prefix){
+ const s=state.metrics[prefix+'Success'],t=state.metrics[prefix+'Total'];
+ if(s===''||t==='')return {label:'—',value:null,invalid:false};
+ const success=Number(s),total=Number(t);
+ if(!Number.isSafeInteger(success)||!Number.isSafeInteger(total)||success<0||total<=0||success>total)return {label:'请检查次数',value:null,invalid:true};
+ return {label:(success/total*100).toFixed(1)+'%',value:success/total*100,invalid:false};
+}
+function renderMetrics(){
+ const before=metricRate('before'),after=metricRate('after');$('before-rate').textContent=before.label;$('after-rate').textContent=after.label;
+ let message='填写前后评估数据后，显示成功率差值。';
+ if(before.invalid||after.invalid)message='次数无效：成功次数不能大于总次数，总次数必须是正整数。';
+ else if(before.value!==null&&after.value!==null){if(!state.metrics.paired)message='请先核对并确认相同评估集合和配置，之后再比较前后差值。';else if(Number(state.metrics.beforeTotal)!==Number(state.metrics.afterTotal))message='前后评估总次数不同，请补齐相同集合后再比较。';else {const delta=after.value-before.value;message=`成功率变化：${delta>0?'+':''}${delta.toFixed(1)} 个百分点。这是单个训练种子的观察，不能据此声称稳定提升或泛化。`;}}
+ $('metric-delta').textContent=message;
+}
+function renderSettings(){
+ $('start-date').value=state.startDate;$('daily-hours').value=state.dailyHours;$('route').value=state.route;$('profile').value=state.profile;
+ document.querySelectorAll('[data-metric]').forEach(el=>el.value=state.metrics[el.dataset.metric]);$('eval-evidence').value=state.metrics.evidence;$('paired-eval').checked=state.metrics.paired;
+ renderWorkload();renderMetrics();
+}
+function renderWorkload(){$('workload').textContent=`当前容量：${state.dailyHours} 小时 / 天 × 48 个推进日 ≈ ${Number((state.dailyHours*48).toFixed(1))} 小时，另留 8 天复盘 / 缓冲。默认任务按 2–3 小时规划；不足 2 小时时建议把每个“学习日”拆成两个自然日，优先保住单任务闭环和发布周。开始日期默认首次打开当天。`;}
+function exportBackup(){
+ const backup={...state,exportedAt:new Date().toISOString()};const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download=`embodied-lab-progress-${localDate()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('已生成进度备份，请确认浏览器下载完成。');
+}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+$('week-grid').addEventListener('click',e=>{const b=e.target.closest('[data-week]');if(b)selectDay(Number(b.dataset.week)*7+1);});
+for(const id of ['day-list','heatmap'])$(id).addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(b)selectDay(Number(b.dataset.day));});
+$('search').addEventListener('input',renderDays);$('filter').addEventListener('change',renderDays);
+$('week-gate').addEventListener('change',e=>{state.gates[selectedWeek]=e.target.checked;save();renderStats();renderWeeks();});
+$('day-detail').addEventListener('change',e=>{
+ const r=editableRecord(selectedDay),el=e.target;
+ if(el.matches('[data-task]'))r.checks[Number(el.dataset.task)]=el.checked;
+ else if(el.id==='day-blocked')r.blocked=el.value==='blocked';
+ else return;
+ save();renderProgress();
+});
+$('day-detail').addEventListener('input',e=>{
+ const el=e.target,r=editableRecord(selectedDay);
+ if(el.id==='day-notes')r.notes=el.value;
+ else if(el.id==='day-hours'){if(el.value===''||!el.validity.valid)return;r.hours=Number(el.value);}
+ else return;
+ save();renderStats();
+});
+$('day-detail').addEventListener('click',e=>{const b=e.target.closest('button');if(b?.id==='prev-day'&&selectedDay>1)selectDay(selectedDay-1);if(b?.id==='next-day'&&selectedDay<56)selectDay(selectedDay+1);});
+$('today-btn').addEventListener('click',()=>{const today=todayIndex();selectDay(Math.max(1,Math.min(56,today)));if(today<1)toast('计划尚未开始，已定位到 Day 1。');if(today>56)toast('计划期已结束，已定位到 Day 56；可继续补齐任务。');});
+$('next-btn').addEventListener('click',()=>{const idx=PLAN.findIndex((_,i)=>!dayDone(i+1));if(idx===-1){toast('56 天任务已完成，继续核验 GitHub 发布清单。');switchView('project');}else selectDay(idx+1);});
+$('release-list').addEventListener('change',e=>{if(e.target.matches('[data-release]')){state.release[Number(e.target.dataset.release)]=e.target.checked;save();renderStats();}});
+$('start-date').addEventListener('change',e=>{if(!validDate(e.target.value)){e.target.value=state.startDate;toast('请选择 2000–2100 年间的有效日期。');return;}state.startDate=e.target.value;save();renderProgress();renderDetail();});
+$('daily-hours').addEventListener('change',e=>{if(!e.target.value||!e.target.validity.valid){e.target.value=state.dailyHours;toast('每天投入请填写 0.5–12 小时，以 0.5 小时递增。');return;}state.dailyHours=Number(e.target.value);save();renderWorkload();});
+$('route').addEventListener('change',e=>{state.route=e.target.value;save();renderStats();if(state.route==='small')toast('已记录降级路线。请在每日日志中明确替代任务，保留 VLA 未完成项。');});
+$('profile').addEventListener('input',e=>{state.profile=e.target.value;save();});
+document.querySelectorAll('[data-metric]').forEach(el=>el.addEventListener('input',()=>{if(el.validity.badInput||!/^\d{0,7}$/.test(el.value)){el.setCustomValidity('请输入最多 7 位的非负整数');$(el.dataset.metric.startsWith('before')?'before-rate':'after-rate').textContent='请检查次数';$('metric-delta').textContent='请输入非负整数；当前无效输入尚未保存。';return;}el.setCustomValidity('');state.metrics[el.dataset.metric]=el.value;save();renderMetrics();}));
+$('eval-evidence').addEventListener('input',e=>{state.metrics.evidence=e.target.value;save();});$('paired-eval').addEventListener('change',e=>{state.metrics.paired=e.target.checked;save();renderMetrics();});
+$('export-btn').addEventListener('click',exportBackup);$('import-btn').addEventListener('click',()=>$('import-file').click());
+$('import-file').addEventListener('change',async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{if(file.size>2000000)throw Error('文件大于 2 MB，请选择本页导出的 JSON 备份');const imported=validateState(JSON.parse(await file.text()));
+  if(!confirm('导入将替换当前浏览器中的全部进度、日志与设置。建议先导出当前记录。确定导入此备份？'))return;
+  state=imported;storageBlocked=false;save();selectDay(Math.max(1,Math.min(56,todayIndex())));renderRelease();renderSettings();toast('备份已导入；请留意页面是否提示自动保存失败。');
+ }catch(error){toast('导入失败，当前进度未改变：'+error.message);}finally{e.target.value='';}
+});
+// 跨标签页修改时提示重新载入，避免旧标签页静默覆盖较新的进度。
+window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY){storageBlocked=true;warnStorage('另一个标签页修改了进度。请先导出本页未同步记录，再刷新加载最新数据，避免互相覆盖。');}});
+renderProgress();renderDetail();renderRelease();renderSettings();
+if(storageBlocked)warnStorage('无法读取已有本地记录，或浏览器禁止存储。为避免覆盖旧数据，本页暂不自动保存；请导出当前进度，或导入有效备份。');
+</script>
+</body>
+</html>
