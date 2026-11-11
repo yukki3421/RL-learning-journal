@@ -10,7 +10,10 @@
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "stopOnEntry": true
+      "stopOnEntry": true,
+      "pythonArgs": [
+        "-Xfrozen_modules=off"
+      ]
     },
     {
       "name": "RL：调试当前 Python 文件",
@@ -20,7 +23,10 @@
       "python": "${workspaceFolder}/.venv/bin/python",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
-      "justMyCode": true
+      "justMyCode": true,
+      "pythonArgs": [
+        "-Xfrozen_modules=off"
+      ]
     },
     {
       "name": "RL：进入 Gymnasium 源码",
@@ -31,7 +37,10 @@
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "justMyCode": false,
-      "stopOnEntry": true
+      "stopOnEntry": true,
+      "pythonArgs": [
+        "-Xfrozen_modules=off"
+      ]
     },
     {
       "name": "RL：调试离屏可视化",
@@ -40,15 +49,26 @@
       "program": "${workspaceFolder}/handson/render_cartpole.py",
       "python": "${workspaceFolder}/.venv/bin/python",
       "cwd": "${workspaceFolder}",
-      "args": ["--seed", "7", "--action", "0"],
+      "args": [
+        "--seed",
+        "7",
+        "--action",
+        "0"
+      ],
       "console": "integratedTerminal",
-      "justMyCode": true
+      "justMyCode": true,
+      "pythonArgs": [
+        "-Xfrozen_modules=off"
+      ]
     },
     {
       "name": "RL：连接本机 debugpy :5678",
       "type": "debugpy",
       "request": "attach",
-      "connect": {"host": "127.0.0.1", "port": 5678},
+      "connect": {
+        "host": "127.0.0.1",
+        "port": 5678
+      },
       "justMyCode": true
     }
   ]

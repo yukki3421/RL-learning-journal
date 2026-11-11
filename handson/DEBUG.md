@@ -1,6 +1,6 @@
 # 调试手写 RL 代码
 
-项目已安装 `debugpy` 开发依赖，VS Code 配置使用 `${workspaceFolder}/.venv/bin/python`。请以本仓库为工作区根目录；远程连接时，在服务器端安装编辑器推荐的 Python 和 Python Debugger 扩展。
+项目已安装 `debugpy` 开发依赖，调试启动配置已关闭 Python frozen modules，以避免相关断点警告。VS Code 配置使用 `${workspaceFolder}/.venv/bin/python`。请以本仓库为工作区根目录；远程连接时，在服务器端安装编辑器推荐的 Python 和 Python Debugger 扩展。
 
 ## 第一次打断点
 
@@ -34,7 +34,7 @@
 ## 终端启动，再连接调试器
 
 ```bash
-uv run python -m debugpy --listen 127.0.0.1:5678 --wait-for-client handson/01_cartpole.py
+uv run python -Xfrozen_modules=off -m debugpy --listen 127.0.0.1:5678 --wait-for-client handson/01_cartpole.py
 ```
 
 这个命令会等待调试器连接，然后选择 `RL：连接本机 debugpy :5678` 并按 F5。在 Remote SSH / 容器工作区中，终端与调试扩展应运行在同一远程环境；如果编辑器只在本地运行，需要转发服务器的 5678 端口。
