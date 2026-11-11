@@ -1,0 +1,29 @@
+[project]
+name = "rl-learning-journal"
+version = "0.1.0"
+description = "从 RL 基础笔记到具身强化学习的代码练习"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "gymnasium[classic-control]>=1.2,<2",
+    "pillow>=13.0.0",
+    "torch>=2.5,<3",
+]
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8.22",
+    "Markdown==3.11.3",
+]
+
+[tool.uv]
+package = false
+cache-dir = ".uv-cache"
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

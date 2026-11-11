@@ -2,14 +2,30 @@
 
 配合 [学习路线](../README.md) 使用，记录已经学习的内容。后续按学习顺序增加笔记。
 
+在 [学习工作台](../index.html) 的“学习笔记”中可以直接阅读完整笔记，并分别记录阅读和代码练习进度。修改本目录的 Markdown 后，运行 `python scripts/build_notes.py` 同步网页正文；构建依赖见项目 README。
+
 ## 阅读顺序
 
 1. [奖励与回报](01-reward-and-return.md)：VLA 中的 RL 概念、折扣回报、时间下标和计算例子。
 2. [训练时如何计算回报](02-computing-returns.md)：完整轨迹、反向递推、自举、终止与截断。
 3. [状态价值函数](03-state-value-function.md)：函数的直觉、实际回报与期望回报、价值网络的训练，以及如何用于自举。
 4. [动作价值与优势](04-action-value-and-advantage.md)：V 与 Q 的区别、优势的正负含义，以及真实优势与样本估计。
+5. [策略如何学习](05-how-policy-learns.md)：动作概率、优势指导的更新方向、基础策略损失，以及可运行的最小参数更新例子。
+6. [认识 Gymnasium 与 CartPole](06-gymnasium-and-cartpole.md)：手写代码前的任务介绍、观测和动作、奖励、结束条件，以及环境接口。
+7. [策略网络与动作分布](07-policy-network-and-distribution.md)：logits、softmax、Categorical 采样，以及从四个观测生成两个动作分数。
 
-下一步：策略如何学习，以及优势如何指导动作概率的调整。
+当前实践：[从零手写 RL](../handson/README.md)，先从环境初始化与轨迹采集开始，再逐步实现策略梯度。Actor-Critic、GAE 和 PPO 在实践推进中继续补齐。
+
+## 配套代码练习
+
+先按 [代码练习指南](../practice/README.md) 运行、修改并解释结果，再继续增加理论知识。每次先写下预测，再运行命令核对。
+
+| 笔记 | 对应练习 | 重点阅读的函数 |
+| --- | --- | --- |
+| 01–02 · 奖励、回报、自举 | 练习 1–2：查看 rollout、计算回报 | `collect_episode`、`discounted_returns` |
+| 03 · 状态价值函数 | 练习 3：训练一个价值预测 | `run_value` |
+| 04 · 动作价值与优势 | 练习 1、4：找出 G、V、A 并解释正负号 | `run_rollout`、`run_update` |
+| 05 · 策略如何学习 | 练习 4–6：单次更新、完整训练、冻结策略对照 | `policy_gradient`、`update`、`run_train` |
 
 ## 统一符号约定
 
@@ -26,6 +42,7 @@ $$
 | $a_t$ | 第 $t$ 步执行的动作 |
 | $r_t$ | 执行 $a_t$ 后，环境在这次转移中给出的奖励 |
 | $\pi_\theta$ | 参数为 $\theta$ 的策略 |
+| $\pi_\theta(a\mid s)$ | 本目录的离散动作例子中，策略在状态 $s$ 下选择动作 $a$ 的概率 |
 | $\gamma$ | 折扣因子 |
 | $G_t$ | 从第 $t$ 步开始的回报 |
 | $T$ | 一条完整轨迹的动作总数，最后一个动作下标为 $T-1$ |

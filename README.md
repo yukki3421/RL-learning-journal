@@ -2,14 +2,43 @@
 
 面向已有 VLA 基础、希望理解并跑通具身 RL 的学习路线。
 
+## Python 与 uv 环境
+
+本项目使用 Python 3.12，由 uv 在仓库根目录创建 `.venv`。首次使用或拉取依赖变更后运行：
+
+```bash
+uv --cache-dir .uv-cache sync --locked
+uv run python practice/mini_rl.py rollout --episodes 5 --seed 7
+```
+
+`uv run` 会使用项目虚拟环境，无需手动激活。也可以执行 `source .venv/bin/activate` 后使用 `python`。`handson/` 手写练习使用 Gymnasium 与 CPU 版 PyTorch；`practice/` 中的参考示例仅依赖标准库。开发依赖 Markdown 用于把笔记同步到网页。`uv.lock` 固定依赖版本，`.venv` 不提交到 Git。
+
+当前学习入口是 [从零手写 RL](handson/README.md)：从 `handson/01_cartpole.py` 的 TODO 开始，每次亲手补全一个小步骤，再运行并解释输出。
+
+断点调试见 [Python 调试指南](handson/DEBUG.md)。VS Code 的“运行和调试”已配置手写练习、当前文件、第三方库源码与可视化脚本入口，均使用项目 `.venv`；推荐扩展见 `.vscode/extensions.json`。
+
+```bash
+uv run python -m unittest discover -s practice -v
+uv run python scripts/build_notes.py --check
+```
+
 ## 每日计划与进度网页
 
 打开 [Embodied Lab · 8 周项目计划](index.html)，查看 56 天的每日目标、实践任务、产物与验收条件。计划沿用本文的 RL4VLA + PPO 主线，以一个可复现的机械臂放置任务 GitHub 项目为终点。
 
 - 默认每天主动投入 2–3 小时，每周 6 天推进、1 天复盘；GPU 训练运行时间另计。开始日期默认为首次打开当天，可在“资料与设置”中修改。
-- 支持任务勾选、实际投入、学习日志、阻塞标记、周验收、真实评估数据速记及 GitHub 发布清单。初始进度全部未完成，现有笔记不自动计为掌握。
+- 支持任务勾选、实际投入、学习日志、阻塞标记、周验收、真实评估数据速记及 GitHub 发布清单。“学习笔记”已整理第 1–7 课的完整内容与代码入口；根据 2026-11-11 对话确认，这五课记录为已读，代码练习仍待你实际运行后勾选。
+- 知识阅读与项目实践分别计数；仅同步已确认的 Day 3 价值笔记阅读项，PPO、环境搭建和实验验收继续按真实完成情况记录。已有浏览器进度会保留，之后手动修改的状态也会保存。
 - 直接用浏览器打开 `index.html`，无需安装前端依赖。远程使用时，可在本目录运行 `python -m http.server 8000 --bind 127.0.0.1`，经 SSH 或编辑器转发 8000 端口后访问。
 - 进度仅保存在当前浏览器与访问地址的 localStorage，不会写回 HTML 或自动同步到 GitHub。每周使用“导出进度”保存 JSON；更换浏览器、地址或设备后可导入恢复。
+- 笔记正文已内置，可直接页内阅读；LaTeX 公式通过联网加载 MathJax 渲染，离线时保留公式源码。Markdown 是内容来源，修改后按下方命令重新生成网页快照。
+
+维护网页笔记时生成快照（Markdown 构建依赖已包含在 uv 开发环境中）：
+
+```bash
+uv run python scripts/build_notes.py
+uv run python scripts/build_notes.py --check
+```
 
 页面中的代码目录、结果路径和 GitHub 链接均是后续交付要求，不表示训练项目或实验结果已经完成。
 
@@ -20,6 +49,8 @@
 **PPO 最小基础 → 小环境练习 → RL4VLA 单任务闭环 → 训练前后比较 → 一个泛化测试**
 
 知识点笔记见 [notes/README.md](notes/README.md)，按学习顺序整理概念、公式、例子和复习题。
+
+代码练习见 [practice/README.md](practice/README.md)。已提供无需 GPU 和第三方库的三步玩具环境，把前五课对应到实际采样、回报递推、价值学习、策略更新，以及保存和独立评估。先运行 `python practice/mini_rl.py rollout --episodes 5`，再按练习逐步修改参数；本练习采用 Monte Carlo 策略梯度与表格价值预测，尚不是 PPO 或机器人仿真。
 
 ## 范围与预期
 

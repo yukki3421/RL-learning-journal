@@ -1,0 +1,55 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "RL：调试手写 CartPole（入口暂停）",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/handson/01_cartpole.py",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "stopOnEntry": true
+    },
+    {
+      "name": "RL：调试当前 Python 文件",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "RL：进入 Gymnasium 源码",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/handson/01_cartpole.py",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "stopOnEntry": true
+    },
+    {
+      "name": "RL：调试离屏可视化",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/handson/render_cartpole.py",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "args": ["--seed", "7", "--action", "0"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "RL：连接本机 debugpy :5678",
+      "type": "debugpy",
+      "request": "attach",
+      "connect": {"host": "127.0.0.1", "port": 5678},
+      "justMyCode": true
+    }
+  ]
+}

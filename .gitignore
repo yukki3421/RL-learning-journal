@@ -1,12 +1,16 @@
 # Local editor / agent settings
 .agents/
 .codex/
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/extensions.json
 .idea/
 .DS_Store
 
 # Local environments, caches and logs
 .venv/
+.uv-cache/
 venv/
 __pycache__/
 *.py[cod]
@@ -31,3 +35,6 @@ wandb/
 *.pt
 *.pth
 *.safetensors
+
+# Local teaching experiments
+runs/
