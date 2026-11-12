@@ -2,6 +2,8 @@
 
 配合 [学习路线](../README.md) 使用，记录已经学习的内容。后续按学习顺序增加笔记。
 
+**当前主目标：尽快跑通 RL4VLA 单任务 PPO 的采样、更新、保存与独立评估。** CartPole 一次更新已完成核对；后续讲义围绕 RL4VLA 实际训练入口补齐所需概念，按 [README 中的当前执行优先级](../README.md) 推进。
+
 在 [学习工作台](../index.html) 的“学习笔记”中可以直接阅读完整笔记，并分别记录阅读和代码练习进度。修改本目录的 Markdown 后，运行 `python scripts/build_notes.py` 同步网页正文；构建依赖见项目 README。
 
 ## 阅读顺序
@@ -13,8 +15,11 @@
 5. [策略如何学习](05-how-policy-learns.md)：动作概率、优势指导的更新方向、基础策略损失，以及可运行的最小参数更新例子。
 6. [认识 Gymnasium 与 CartPole](06-gymnasium-and-cartpole.md)：手写代码前的任务介绍、观测和动作、奖励、结束条件，以及环境接口。
 7. [策略网络与动作分布](07-policy-network-and-distribution.md)：logits、softmax、Categorical 采样，以及从四个观测生成两个动作分数。
+8. [第一次策略更新](08-first-policy-update.md)：完整采样、保存 log 概率、手写回报递推，以及 REINFORCE 的一次参数更新。
+9. [Actor-Critic 与 TD 误差](09-actor-critic-and-td.md)：价值网络、一步自举目标、TD 残差，以及 RL4VLA 源码中的对应位置。
+10. [GAE：广义优势估计](10-generalized-advantage-estimation.md)：多步 TD 误差加权、lambda、反向递推与 RL4VLA 的优势及价值目标。
 
-当前实践：[从零手写 RL](../handson/README.md)，先从环境初始化与轨迹采集开始，再逐步实现策略梯度。Actor-Critic、GAE 和 PPO 在实践推进中继续补齐。
+当前学习 **10 · GAE**，下一课为 **11 · PPO**。每课先理解，再由你手写一个最小核对实验，并对应到 RL4VLA 实际源码。第 11 课尚待编写。
 
 ## 配套代码练习
 
